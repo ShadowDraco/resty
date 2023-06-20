@@ -1,13 +1,17 @@
 import React from 'react';
 
-class Results extends React.Component {
-  render() {
-    return (
-      <section>
-        <pre>{this.props.data ? JSON.stringify(this.props.data, undefined, 2) : null}</pre>
-      </section>
-    );
-  }
-}
+import './Results.scss';
 
-export default Results;
+export default function Results(props) {
+	return (
+		<section className='results'>
+			<pre>
+				{props.data ? (
+					<p data-testid='results'>
+						{JSON.stringify(props.data, undefined, 2)}
+					</p>
+				) : null}
+			</pre>
+		</section>
+	);
+}
