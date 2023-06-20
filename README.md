@@ -1,70 +1,145 @@
-# Getting Started with Create React App
+# Component Based UI
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview 
 
-## Available Scripts
+Component based UI systems like `React`, `Angular`, `Vue` and the like all operate on a variation of "Atomic Design", using "Components" as the means of delivery.
 
-In the project directory, you can run:
+"Thinking in React" means re-evaluating how you look at a web application: Breaking down it's functional parts, data dependencies, behaviors, and styles into independent, deliverable, re-usable components.
 
-### `npm start`
+### [Today's Freehand](https://ryangallaway792749.invisionapp.com/freehand/401d53-class-26-i2ARiuPY4)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Class Outline
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+<!-- To Be Completed By Instructor -->
 
-### `npm test`
+## Learning Objectives
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Students will be able to
 
-### `npm run build`
+#### Describe and Define
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- SASS - Nesting and Variables
+- "Component Architecture"
+- Application and Component "State"
+- Debate/Discuss Libraries vs Frameworks
+- Basics of a React App
+  - index.html in public (root div)
+  - index.js as an untouchable "bootstrap" or "entry point"
+  - React Renders into that div
+  - JSX is actually javascript but it looks like markup
+  - Components can be classes or functions. What gets "returned" gets "rendered"
+    - Class - `render() { return(jsx) }`
+    - Function - `return(jsx)`
+  - Components can load and render each other
+  - Components can load their own css
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+#### Execute
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Begin a React project locally with `create-react-app`
+- Use codesandbox.io to work live on a React application
+- Create and render `Class` and `Functional` React components to the DOM
+- Add event listeners to React components
+- Update React component state
+- Style React applications/components using SASS
 
-### `npm run eject`
+## Notes
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+As a component based system, React does an awful lot for us, principally, it gets out out of the way and makes it EASY to implement your application the way you see it, using familiar tools.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+> JSX looks like markup, but it's actually Javascript. If you had to code it out, you wouldn't...
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### JSX
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```javascript
+const Header = ({greeting}) => {
+  return (
+    <h1 className="greeting">
+      {greeting}
+    </h1>
+  );
+};
 
-## Learn More
+const App = () => {
+  return <Header greeting="Hello, world!" />
+} 
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Behind the scenes...
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```javascript
+const Header = ({greeting}) => 
+  React.createElement(
+    'h1',
+    {className: 'greeting'},
+    greeting
+  );
 
-### Code Splitting
+const App = () => React.createElement(
+  Header,
+  {greeting: "Hello, world!"}
+)
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Basic (Basic) React
 
-### Analyzing the Bundle Size
+1. React is a series of modules (components) that can be ES6 Classes or Functions. They "render" what they "return"
+1. An "index" that imports 'React', includes components, which returns their output into the DOM into `<div id="root"></div>`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+   ```javascript
+   import React from 'react';
+   import ReactDOM from 'react-dom';
+   import App from './app.js';
 
-### Making a Progressive Web App
+   class Main extends React.Component {
+     render() {
+       return <App />;
+     }
+   }
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+   const rootElement = document.getElementById('root');
+   ReactDOM.render(<Main />, rootElement);
+   ```
 
-### Advanced Configuration
+1. An "app" that imports other components and "renders" what they "return"
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+   ```javascript
+   import React from 'react';
+   import Content from './content.js';
 
-### Deployment
+   class App extends React.Component {
+     render() {
+       return (
+         <React.Fragment>
+           <Header />
+           <Main />
+           <Footer />
+         </React.Fragment>
+       );
+     }
+   }
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+   export default App;
 
-### `npm run build` fails to minify
+   ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1. Components that do work and render content
+
+   ```javascript
+   import React from 'react';
+
+   class Content extends React.Component {
+     handleClick = () => {
+       console.log('clicked');
+     }
+     render() {
+       return (
+         <div>
+           <button onClick={this.handleClick}>Click Me!</button>
+         </div>
+       );
+     }
+   }
+
+   export default Content;
+
+   ```
