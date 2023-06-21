@@ -2,12 +2,13 @@
 
 ## Author: Ethan Storm
 
-## Collaboration: Code Fellows LAB-26
+## Collaboration: Code Fellows LAB-26, 27
 
 ### Resources and Links
 
-[lab 26 sandbox](https://codesandbox.io/p/github/ShadowDraco/resty/main?workspaceId=362bdf81-89b2-4ef7-a8ac-8d339549b43b)
-![Lab 26 UML](./assets/Lab26.png)
+- [lab 26 sandbox](https://codesandbox.io/p/github/ShadowDraco/resty/main?workspaceId=362bdf81-89b2-4ef7-a8ac-8d339549b43b)
+- ![Lab 26 UML](./assets/Lab26.png)
+- ![Lab 27 UML](./assets/Lab27.png)
 
 ### GOALS
 
@@ -34,7 +35,15 @@
 
 #### **Phase 1: Application Setup**
 
-    -   Basic React Application
-    -   Scaffolding
-    -   Basic State
-    -   Rendering
+- Basic React Application
+- Scaffolding
+- Basic State
+- Rendering
+- Understand how react functional components work, transform the code base and learn to use sass on a basic level. Begin implementing tests in react!
+
+#### **Phase 2: Application State**
+
+- Basic State
+- API calls
+- updating data with responses
+- Receive user input, connect to a live API, turn APP in to a functiuonal component

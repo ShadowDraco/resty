@@ -1,3 +1,4 @@
+@import '../../App.scss';
 $backgroundColor: #efefef;
 $radius: 40%;
 
@@ -17,9 +18,12 @@ form {
 				padding: 0.25rem 0.5rem;
 				background: #ccc;
 
+				&.current {
+					background: lighten($accentColor, 50);
+				}
 				&:hover,
 				&.active {
-					background: #fff;
+					background: #9a9a9a;
 				}
 			}
 		}

@@ -2,4 +2,10 @@
 
 .results {
 	background: darken($backgroundColor, 25);
+	max-height: 40vh;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	padding: 1rem;
+	color: lighten($backgroundColor, 60);
+	border: 3px $accentColor groove;
 }
