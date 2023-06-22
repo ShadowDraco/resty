@@ -1,23 +1,37 @@
+import React from 'react'
+import App from '../App'
+
+// mock api calls with MSw
+import { rest } from 'msw'
+import { setupServer } from 'msw/node'
 import '@testing-library/jest-dom'
 import { fireEvent, render, screen } from '@testing-library/react'
 
-import App from '../App'
+const mockPokemonData = {
+  count: 1281,
+  next: 'https://pokeapi.co/api/v2/pokemon/?offset=20&limit=20',
+  previous: null,
+  results: [
+    {
+      name: 'bulbasaur',
+      url: 'https://pokeapi.co/api/v2/pokemon/1/',
+    },
+  ],
+}
 
-test('page updates when form submitted', async () => {
-  render(<App />)
+const server = setupServer(
+  rest.get('/pokemon', async (req, res, ctx) => {
+    return res(ctx.json(mockPokemonData))
+  })
+)
 
-  let button = screen.getByTestId('form-button')
-  // Click button
-  fireEvent.click(button)
-
-  // Wait for page to update with query text
-  const response = await screen.findByTestId('results')
-  expect(response).toBeInTheDocument()
-  expect(response).toHaveTextContent('Dad joke:')
-})
+beforeAll(() => server.listen())
+afterEach(() => server.resetHandlers())
+afterAll(() => server.close())
+//* */ end MSW setup
 
 test('Changing the method and url works', async () => {
-  render(<App />)
+  render(<App url='/pokemon' />)
 
   let urlInput = screen.getByTestId('form-url')
   let getButton = screen.getByTestId('form-get')
@@ -28,4 +42,16 @@ test('Changing the method and url works', async () => {
   expect(postButton).toHaveClass('current')
   expect(getButton.classList.contains('current')).toBeFalsy()
   expect(urlInput).toHaveValue('https://pokeapi.co/api/v2/pokemon/')
+})
+
+test('page updates when form submitted', async () => {
+  render(<App url='/pokemon' />)
+
+  let button = screen.getByTestId('form-button')
+  // submit form
+  fireEvent.click(button)
+
+  const response = await screen.findByTestId('API-RESULT')
+
+  expect(response).toBeInTheDocument()
 })

@@ -9,6 +9,7 @@ export default function Form(props) {
   }
 
   const [method, setMethod] = useState('GET')
+  const [currentMethod, setCurrentMethod] = useState('GET')
   const [body, setBody] = useState({})
   const [url, setUrl] = useState('https://pokeapi.co/api/v2/pokemon/')
 
@@ -17,6 +18,9 @@ export default function Form(props) {
   }
   const updateMethod = e => {
     setMethod(e.target.innerText)
+  }
+  const updateCurrentMethod = value => {
+    setCurrentMethod(value)
   }
 
   const updateBody = e => {
@@ -31,30 +35,42 @@ export default function Form(props) {
           <span
             id='get'
             data-testid='form-get'
-            className={method === 'GET' ? 'current' : ''}
-            onClick={updateMethod}
+            className={currentMethod === 'GET' ? 'current' : ''}
+            onClick={e => {
+              updateMethod(e)
+              updateCurrentMethod('GET')
+            }}
           >
             GET
           </span>
           <span
             id='post'
             data-testid='form-post'
-            className={method === 'POST' ? 'current' : ''}
-            onClick={updateMethod}
+            className={currentMethod === 'POST' ? 'current' : ''}
+            onClick={e => {
+              updateMethod(e)
+              updateCurrentMethod('POST')
+            }}
           >
             POST
           </span>
           <span
             id='put'
-            className={method === 'PUT' ? 'current' : ''}
-            onClick={updateMethod}
+            className={currentMethod === 'PUT' ? 'current' : ''}
+            onClick={e => {
+              updateMethod(e)
+              updateCurrentMethod('PUT')
+            }}
           >
             PUT
           </span>
           <span
             id='delete'
-            className={method === 'DELETE' ? 'current' : ''}
-            onClick={updateMethod}
+            className={currentMethod === 'DELETE' ? 'current' : ''}
+            onClick={e => {
+              updateMethod(e)
+              updateCurrentMethod('DELETE')
+            }}
           >
             DELETE
           </span>

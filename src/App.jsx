@@ -9,7 +9,7 @@ import Results from './Components/Results'
 
 import axios from 'axios'
 
-export default function App() {
+export default function App({ url }) {
   const [data, setData] = useState(null)
   const [loading, setLoading] = useState(false)
   const [requestParams, setRequestParams] = useState({})
@@ -21,6 +21,7 @@ export default function App() {
     const doApiCall = async () => {
       try {
         if (requestParams.method) {
+          if (url) requestParams.url = url
           let data = await axios(requestParams)
 
           setData(data)
@@ -57,7 +58,7 @@ export default function App() {
           {error.code && error.code}: {error.message}
         </p>
       )}
-      <Results data={data} loading={loading} setError={setError} />
+      <Results data={data} loading={loading} setError={setError} url={url} />
       <Footer />
     </React.Fragment>
   )
