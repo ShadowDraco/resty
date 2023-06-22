@@ -4,7 +4,7 @@ import Results from '.'
 import { rest } from 'msw'
 import { setupServer } from 'msw/node'
 import '@testing-library/jest-dom'
-import { fireEvent, render, screen, waitFor } from '@testing-library/react'
+import { render, screen,  } from '@testing-library/react'
 
 const server = setupServer(
   rest.get('/joke', async (req, res, ctx) => {

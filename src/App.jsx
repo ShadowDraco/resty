@@ -36,7 +36,7 @@ export default function App({ url }) {
     doApiCall()
 
     setLoading(false)
-  }, [requestParams])
+  }, [requestParams, url])
 
   const callApi = requestParams => {
     setRequestParams(requestParams)
