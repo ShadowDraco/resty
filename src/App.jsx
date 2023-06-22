@@ -1,52 +1,65 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react'
 
-import './App.scss';
+import './App.scss'
 
-import Header from './Components/Header';
-import Footer from './Components/Footer';
-import Form from './Components/Form';
-import Results from './Components/Results';
+import Header from './Components/Header'
+import Footer from './Components/Footer'
+import Form from './Components/Form'
+import Results from './Components/Results'
 
-import axios from 'axios';
+import axios from 'axios'
 
-export default function App() {
-	const [data, setData] = useState(null);
-	const [loading, setLoading] = useState(false);
-	const [requestParams, setRequestParams] = useState({});
+export default function App({ url }) {
+  const [data, setData] = useState(null)
+  const [loading, setLoading] = useState(false)
+  const [requestParams, setRequestParams] = useState({})
+  const [error, setError] = useState(null)
 
-	const callApi = async (requestParams, useMockData) => {
-		setRequestParams(requestParams);
-		let data;
-		setLoading(true);
-		if (!useMockData) {
-			data = await axios(requestParams);
-		} else {
-			// mock output
-			data = {
-				count: 2,
-				results: [
-					{ name: 'fake thing 1', url: 'http://fakethings.com/1' },
-					{ name: 'fake thing 2', url: 'http://fakethings.com/2' },
-				],
-			};
-		}
+  useEffect(() => {
+    setLoading(true)
 
-		setData(data);
-		setLoading(false);
-	};
+    const doApiCall = async () => {
+      try {
+        if (requestParams.method) {
+          if (url) requestParams.url = url
+          let data = await axios(requestParams)
 
-	return (
-		<React.Fragment>
-			<Header />
-			<div>Request Method: {requestParams.method}</div>
-			<div>URL: {requestParams.url}</div>
+          setData(data)
+          setError(null)
+        }
+      } catch (error) {
+        console.log(error)
+        setError({ message: error.message, code: error.code })
+      }
+    }
+    // call the function
+    doApiCall()
 
-			<Form handleApiCall={callApi} />
-			<Results
-				data={data}
-				loading={loading}
-			/>
-			<Footer />
-		</React.Fragment>
-	);
+    setLoading(false)
+  }, [requestParams, url])
+
+  const callApi = requestParams => {
+    setRequestParams(requestParams)
+  }
+
+  return (
+    <React.Fragment>
+      <Header />
+      <div data-testid='app-method'>
+        <small>Request Method: {requestParams.method}</small>
+      </div>
+      <div>
+        <small>URL: {requestParams.url}</small>
+      </div>
+
+      <Form handleApiCall={callApi} />
+      {error && (
+        <p id='error'>
+          {error.code && error.code}: {error.message}
+        </p>
+      )}
+      <Results data={data} loading={loading} setError={setError} url={url} />
+      <Footer />
+    </React.Fragment>
+  )
 }
