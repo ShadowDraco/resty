@@ -4,6 +4,6 @@ import History from '.'
 
 test('renders History', () => {
   render(<History />)
-  const viewerElement = screen.getByText('Request History')
+  const viewerElement = screen.getByText(/Request History/i)
   expect(viewerElement).toBeInTheDocument()
 })

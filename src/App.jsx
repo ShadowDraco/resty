@@ -11,7 +11,6 @@ import axios from 'axios';
 import History from './Components/History';
 
 export const requestReducer = (state, action) => {
-	console.log(action);
 	switch (action.type) {
 		case ACTIONS.ADD:
 			return { ...state, history: [...state.history, action.payload] };
