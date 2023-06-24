@@ -1,11 +1,12 @@
 import React from 'react';
 
-export default function Entry({ request, updateData }) {
+export default function Entry({ request, updateData, remove }) {
 	return (
 		<div
 			className='entry'
+			data-testid='history-entry'
 			onClick={() => {
-				updateData(request)
+				updateData(request);
 			}}
 		>
 			<div data-testid='app-method'>
@@ -14,6 +15,13 @@ export default function Entry({ request, updateData }) {
 			<div>
 				<small>URL: {request.requestParams.url}</small>
 			</div>
+			<button
+				onClick={() => {
+					remove(request.id);
+				}}
+			>
+				X
+			</button>
 		</div>
 	);
 }

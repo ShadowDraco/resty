@@ -1,4 +1,3 @@
-import React from 'react';
 import Results from '.';
 // mock api calls with MSw
 import { rest } from 'msw';
@@ -22,21 +21,6 @@ beforeAll(() => server.listen());
 afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
 
-test('use effect successful', async () => {
-	render(
-		<Results
-			url='/joke'
-			addRequest={jest.fn()}
-		/>
-	);
-
-	// Wait for the mocked API response to be displayed in the component
-	//await waitFor(() => {
-	const responseElement = await screen.findByTestId('DAD-JOKE');
-	expect(responseElement).toBeInTheDocument();
-	//})
-});
-
 test('renders results section', () => {
 	render(
 		<Results
@@ -46,4 +30,16 @@ test('renders results section', () => {
 	);
 	const sectionElement = screen.getByTestId('results-section');
 	expect(sectionElement).toBeInTheDocument();
+});
+
+test('use effect successful', async () => {
+	render(
+		<Results
+			url='/joke'
+			addRequest={jest.fn()}
+		/>
+	);
+
+	const responseElement = await screen.findByTestId('DAD-JOKE');
+	expect(responseElement).toBeInTheDocument();
 });

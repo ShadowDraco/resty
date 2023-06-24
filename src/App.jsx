@@ -15,8 +15,7 @@ export const requestReducer = (state, action) => {
 		case ACTIONS.ADD:
 			return { ...state, history: [...state.history, action.payload] };
 		case ACTIONS.REMOVE:
-			// remove by index
-			return { ...state => state.history.splice(action.payload, 1) };
+			return { ...state, history: state.history.splice(action.payload, 1) };
 		case ACTIONS.START_LOADING:
 			return { ...state, loading: true };
 		case ACTIONS.STOP_LOADING:
@@ -58,6 +57,10 @@ export default function App({ url }) {
 			},
 		};
 		dispatch(action);
+	};
+
+	const removeRequest = id => {
+		dispatch({ type: ACTIONS.REMOVE, payload: id });
 	};
 
 	const updateData = data => {
@@ -113,6 +116,7 @@ export default function App({ url }) {
 				<History
 					history={history}
 					updateData={updateData}
+					remove={removeRequest}
 				/>
 				<Form handleApiCall={callApi} />
 				{history.error && (

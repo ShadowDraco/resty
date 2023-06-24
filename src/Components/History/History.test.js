@@ -1,9 +1,9 @@
-import { render, screen } from '@testing-library/react'
+import { render, screen } from '@testing-library/react';
 
-import History from '.'
+import History from '.';
 
 test('renders History', () => {
-  render(<History />)
-  const viewerElement = screen.getByText(/Request History/i)
-  expect(viewerElement).toBeInTheDocument()
-})
+	render(<History />);
+	const viewerElement = screen.getByText(/Request History/i);
+	expect(viewerElement).toBeInTheDocument();
+});
