@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-
 import './Form.scss'
+import CodeEditor from '@uiw/react-textarea-code-editor/dist/editor.js'
 
 export default function Form(props) {
   const handleSubmit = e => {
@@ -10,7 +10,7 @@ export default function Form(props) {
 
   const [method, setMethod] = useState('GET')
   const [currentMethod, setCurrentMethod] = useState('GET')
-  const [body, setBody] = useState({})
+  const [body, setBody] = useState('')
   const [url, setUrl] = useState('https://pokeapi.co/api/v2/pokemon/')
 
   const updateUrl = e => {
@@ -92,7 +92,18 @@ export default function Form(props) {
           {method !== 'GET' && (
             <div>
               <span>Body: </span>
-              <textarea name='body' type='text' onChange={updateBody} />
+              <CodeEditor
+                onChange={updateBody}
+                value={body}
+                language='json'
+                placeholder='Please enter JSON'
+                style={{
+                  fontSize: 12,
+                  backgroundColor: '#f1f1f5',
+                  fontFamily:
+                    'ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace',
+                }}
+              />
             </div>
           )}
           <button data-testid='form-button' type='submit'>

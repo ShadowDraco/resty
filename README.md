@@ -10,6 +10,7 @@
 - ![Lab 26 UML](./assets/Lab26.png)
 - ![Lab 27 UML](./assets/Lab27.png)
 - ![Lab 28 UML](./assets/Lab28.png)
+- ![Lab 29 UML](./assets/Lab29.png)
 
 ### GOALS
 
@@ -60,3 +61,13 @@
 - Application fetches data from the URL given, with the method specified.
 - Displays the response headers and results separately.
 - Both headers and results should be “pretty printed” JSON.
+
+#### **Phase 4: Reducer / History**
+
+- As a user, I want to see a list of my previous API calls, so that I can see the results again, quickly.
+- Application fetches data from the URL given, with the method specified.
+- Application stores the API request and returned data into state.
+- Updates the list of previous API calls.
+- Application Displays the response headers and results separately.
+- Both headers and results should be “pretty printed” JSON.
+- Replace any component state managements to use derived state from useReducer() with a reducer function and initial state.

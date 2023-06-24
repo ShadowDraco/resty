@@ -1,12 +1,18 @@
 @import '../../App.scss';
 
 .results {
-  background: darken($backgroundColor, 25);
-  max-height: 50vh;
-  min-height: 25vh;
-  overflow-y: scroll;
-  overflow-x: hidden;
-  padding: 1rem;
-  color: lighten($backgroundColor, 60);
-  border: 3px $accentColor groove;
+	background: darken($backgroundColor, 25);
+	max-height: 60vh;
+	min-height: 30vh;
+	max-width: 50vw;
+	min-width: 30vw;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	padding: 1rem;
+	color: lighten($backgroundColor, 60);
+	border: 3px $accentColor groove;
+}
+
+.w-tc-editor {
+	max-width: 72%;
 }

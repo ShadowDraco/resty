@@ -1,0 +1,24 @@
+@import '../../App.scss';
+
+.history {
+	margin-left: 2px;
+	min-height: 30vw;
+	width: 70vw;
+
+	overflow-y: scroll;
+	overflow-x: hidden;
+	border: 3px black groove;
+
+	p {
+		margin-top: 0;
+	}
+
+	.entry {
+		margin: 1em;
+		background-color: lighten($backgroundColor, 20);
+	}
+
+	small {
+		color: $accentColor;
+	}
+}
