@@ -1,8 +1,24 @@
+@import '../../App.scss';
+
 .history {
-  min-height: 30vw;
-  width: 40vw;
-  max-width: 400px;
-  overflow-y: scroll;
-  overflow-x: hidden;
-  border: 3px black double;
+	margin-left: 2px;
+	min-height: 30vw;
+	width: 70vw;
+
+	overflow-y: scroll;
+	overflow-x: hidden;
+	border: 3px black groove;
+
+	p {
+		margin-top: 0;
+	}
+
+	.entry {
+		margin: 1em;
+		background-color: lighten($backgroundColor, 20);
+	}
+
+	small {
+		color: $accentColor;
+	}
 }
