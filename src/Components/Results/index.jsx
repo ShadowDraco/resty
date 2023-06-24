@@ -41,7 +41,9 @@ export default function Results({ setError, loading, url, addRequest, data }) {
 				payload: { message: error.message, code: error.code },
 			});
 		}
-	}, [url, setError]);
+		//* Should not need to monitor addRequest function OR setError function*/
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [url]);
 
 	return (
 		<section
